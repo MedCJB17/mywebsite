@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cristine Mediona — Data Scientist & Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e14;
+    --surface: #12161f;
+    --surface2: #1a1f2e;
+    --accent: #00e5b0;
+    --accent2: #7c6af7;
+    --accent3: #ff6b6b;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --border: rgba(255,255,255,0.07);
+    --glow: 0 0 40px rgba(0,229,176,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: linear-gradient(rgba(0,229,176,0.03) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0,229,176,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(11,14,20,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-links { display: flex; gap: 36px; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--bg) !important;
+    padding: 8px 20px;
+    border-radius: 3px;
+    font-weight: 600;
+    letter-spacing: 0.05em !important;
+  }
+  .nav-cta:hover { background: #00ffcc !important; color: var(--bg) !important; }
+
+  section { position: relative; z-index: 1; }
+
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 120px 60px 80px;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 28px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    color: var(--text);
+    margin-bottom: 32px;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent);
+  }
+
+  .hero-desc {
+    max-width: 560px;
+    color: var(--muted);
+    font-family: 'Lora', serif;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 14px 32px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+    box-shadow: var(--glow);
+  }
+  .btn-primary:hover { background: #00ffcc; transform: translateY(-2px); }
+
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 32px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 48px;
+    margin-top: 72px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px; font-weight: 800;
+    color: var(--accent);
+    display: block;
+  }
+  .stat-label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  #about {
+    padding: 100px 60px;
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+  }
+
+  .section-label {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--accent);
+    margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800; letter-spacing: -1.5px;
+    line-height: 1.1; margin-bottom: 24px;
+  }
+
+  .about-text {
+    font-family: 'Lora', serif;
+    font-size: 15px; line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .about-contact { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
+  .contact-row {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px; color: var(--muted);
+  }
+  .contact-row .label {
+    color: var(--accent); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    min-width: 70px;
+  }
+
+  .location-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px 14px;
+    font-size: 11px; color: var(--text);
+    letter-spacing: 0.05em;
+  }
+  .pill.active { border-color: var(--accent); color: var(--accent); }
+
+  #skills {
+    padding: 100px 60px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .skills-inner { max-width: 1200px; margin: 0 auto; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .skill-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: var(--glow);
+  }
+
+  .skill-card-icon {
+    font-size: 24px; margin-bottom: 14px;
+    display: block;
+  }
+
+  .skill-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px; font-weight: 700;
+    margin-bottom: 10px; color: var(--text);
+  }
+
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px;
+  }
+
+  .skill-tag {
+    background: var(--surface2);
+    border-radius: 3px;
+    padding: 3px 10px;
+    font-size: 10px; color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  #experience {
+    padding: 100px 60px;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .timeline { margin-top: 60px; position: relative; }
+
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+
+  .timeline-item {
+    padding-left: 48px;
+    padding-bottom: 60px;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -4px; top: 6px;
+    width: 9px; height: 9px;
+    border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+  }
+
+  .timeline-date {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .timeline-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px; font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .timeline-company {
+    font-size: 13px; color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .timeline-desc {
+    color: var(--muted);
+    font-size: 13px; line-height: 1.8;
+  }
+
+  .timeline-desc li { margin-bottom: 6px; list-style: none; padding-left: 16px; position: relative; }
+  .timeline-desc li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent); font-size: 12px;
+  }
+
+  #education {
+    padding: 100px 60px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu-inner { max-width: 1200px; margin: 0 auto; }
+
+  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+
+  .edu-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px;
+    transition: all 0.25s;
+  }
+  .edu-card:hover { border-color: var(--accent2); }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .edu-school { color: var(--accent2); font-size: 12px; letter-spacing: 0.05em; margin-bottom: 12px; }
+  .edu-dates { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+  .edu-desc { color: var(--muted); font-size: 12px; line-height: 1.8; }
+
+  #certifications {
+    padding: 100px 60px;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px; margin-top: 48px;
+  }
+
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    display: flex; gap: 16px; align-items: flex-start;
+    transition: all 0.25s;
+  }
+  .cert-card:hover { border-color: rgba(124,106,247,0.5); }
+
+  .cert-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--surface2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  .cert-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; line-height: 1.3; margin-bottom: 4px; }
+  .cert-year { color: var(--accent); font-size: 10px; letter-spacing: 0.1em; }
+
+  #awards {
+    padding: 80px 60px;
+    background: linear-gradient(135deg, rgba(0,229,176,0.04), rgba(124,106,247,0.04));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .awards-inner { max-width: 1200px; margin: 0 auto; }
+
+  .awards-list { display: flex; flex-direction: column; gap: 16px; margin-top: 48px; }
+
+  .award-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 32px;
+    display: flex; align-items: center; gap: 24px;
+    transition: all 0.25s;
+  }
+  .award-item:hover { border-color: var(--accent3); }
+
+  .award-emoji { font-size: 28px; }
+  .award-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; }
+  .award-desc { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .award-year { margin-left: auto; color: var(--accent); font-size: 12px; font-weight: 600; }
+
+  #contact {
+    padding: 120px 60px;
+    max-width: 1200px; margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-grid { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 48px; }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px 36px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.25s;
+    min-width: 200px;
+  }
+  .contact-card:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-4px); }
+
+  .contact-card-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+  .contact-card-value { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; }
+
+  footer {
+    padding: 32px 60px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--muted); font-size: 11px;
+    letter-spacing: 0.05em;
+    position: relative; z-index: 1;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 2px; }
+
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    animation: fadeUp 0.7s forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  .highlight { color: var(--accent); }
+  .highlight2 { color: var(--accent2); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    #hero, #about, #skills, #experience, #education, #certifications, #awards, #contact { padding-left: 24px; padding-right: 24px; }
+    #about { grid-template-columns: 1fr; gap: 40px; }
+    .edu-grid { grid-template-columns: 1fr; }
+    h1 { letter-spacing: -2px; }
+    footer { flex-direction: column; gap: 8px; text-align: center; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">CM /</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#contact" class="nav-cta">Contact</a>
+  </div>
+</nav>
+
+<div style="position:relative; z-index:1;">
+<section id="hero">
+  <div class="hero-tag fade-in">Available for opportunities</div>
+  <h1 class="fade-in delay-1">
+    Cristine<br>
+    <em>Mediona</em>
+  </h1>
+  <p class="hero-desc fade-in delay-2">
+    Data Scientist & Analyst with 2+ years across pharma, advertising, and FMCG. 
+    Currently finishing a Master's in Big Data Analytics in Madrid — open to roles in 
+    <strong style="color:var(--text)">Europe</strong> and 
+    <strong style="color:var(--text)">Dubai</strong>.
+  </p>
+  <div class="hero-actions fade-in delay-3">
+    <a href="#experience" class="btn-primary">View My Work</a>
+    <a href="mailto:medscb17@gmail.com" class="btn-outline">Get In Touch</a>
+  </div>
+  <div class="hero-stats fade-in delay-4">
+    <div>
+      <span class="stat-num">2+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div>
+      <span class="stat-num">7+</span>
+      <span class="stat-label">Certifications</span>
+    </div>
+    <div>
+      <span class="stat-num">10+</span>
+      <span class="stat-label">Tools & Platforms</span>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div>
+    <div class="section-label">About</div>
+    <h2>Data-driven.<br>Cloud-ready.<br><span class="highlight">Impact-focused.</span></h2>
+    <p class="about-text">
+      I bridge the gap between raw data and real business decisions — turning complex datasets into dashboards, strategies, and tools that move the needle. From Hermes to L'Oréal, I've delivered insights for iconic global brands.
+    </p>
+    <p class="about-text">
+      My background in cybersecurity gives me a rare edge: I approach data not just analytically, but securely and architecturally.
+    </p>
+    <div class="about-contact">
+      <div class="contact-row">
+        <span class="label">Email</span>
+        <span>medscb17@gmail.com</span>
+      </div>
+      <div class="contact-row">
+        <span class="label">Phone</span>
+        <span>+34 676 444 313 / +971 55 136 3849</span>
+      </div>
+      <div class="contact-row">
+        <span class="label">Open to</span>
+        <div class="location-pills">
+          <span class="pill active">🇪🇸 Spain / EU</span>
+          <span class="pill active">🇦🇪 Dubai / UAE</span>
+          <span class="pill">Remote</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:32px;">
+      <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); margin-bottom:20px;">Core Technologies</div>
+      <div style="display:flex; flex-wrap:wrap; gap:10px;">
+        <span class="pill">Python</span><span class="pill">SQL</span><span class="pill">R</span><span class="pill">Java</span><span class="pill">C++</span>
+        <span class="pill">Power BI</span><span class="pill">Tableau</span><span class="pill">Looker Studio</span>
+        <span class="pill">BigQuery</span><span class="pill">GCP</span><span class="pill">Azure</span>
+        <span class="pill">Hadoop</span><span class="pill">Spark</span>
+        <span class="pill">MySQL</span><span class="pill">PostgreSQL</span><span class="pill">NoSQL</span>
+        <span class="pill">HTML/CSS/JS</span><span class="pill">Figma</span>
+      </div>
+      <div style="margin-top:28px; padding-top:24px; border-top:1px solid var(--border);">
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent2); margin-bottom:14px;">Languages</div>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Syne',sans-serif; font-weight:700;">English</div>
+            <div style="font-size:11px; color:var(--muted);">Fluent</div>
+          </div>
+          <div>
+            <div style="font-family:'Syne',sans-serif; font-weight:700;">Filipino</div>
+            <div style="font-size:11px; color:var(--muted);">Native</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="skills-inner">
+    <div class="section-label">Capabilities</div>
+    <h2>What I <span class="highlight">bring</span> to the table</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <span class="skill-card-icon">📊</span>
+        <div class="skill-card-title">Data Analytics & Visualization</div>
+        <div style="font-size:12px; color:var(--muted);">Building dashboards and translating data into business strategy across multiple industries.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Looker Studio</span><span class="skill-tag">Python</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-card-icon">☁️</span>
+        <div class="skill-card-title">Cloud Computing</div>
+        <div style="font-size:12px; color:var(--muted);">Hands-on experience with GCP, Azure, and cloud-native data services.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">GCP</span><span class="skill-tag">BigQuery</span><span class="skill-tag">Azure</span><span class="skill-tag">SAP S/4HANA</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-card-icon">🤖</span>
+        <div class="skill-card-title">Machine Learning & AI</div>
+        <div style="font-size:12px; color:var(--muted);">Applying ML techniques to real business problems — from predictive analytics to automated pipelines.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Scikit-learn</span><span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">APIs</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-card-icon">🗃️</span>
+        <div class="skill-card-title">Big Data Engineering</div>
+        <div style="font-size:12px; color:var(--muted);">Processing and managing large-scale datasets with modern distributed frameworks.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Hadoop</span><span class="skill-tag">Spark</span><span class="skill-tag">Storm</span><span class="skill-tag">MapReduce</span><span class="skill-tag">NoSQL</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-card-icon">🔒</span>
+        <div class="skill-card-title">Cybersecurity</div>
+        <div style="font-size:12px; color:var(--muted);">Security-first mindset from a CS degree major in Cybersecurity and certified ISC credentials.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ISC Certified</span><span class="skill-tag">Cloud Security</span><span class="skill-tag">Compliance</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <span class="skill-card-icon">🎨</span>
+        <div class="skill-card-title">Design & Communication</div>
+        <div style="font-size:12px; color:var(--muted);">Crafting compelling visuals and translating insights into executive-ready narratives.</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Figma</span><span class="skill-tag">Adobe XD</span><span class="skill-tag">Canva</span><span class="skill-tag">Illustrator</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <h2>Where I've <span class="highlight">worked</span></h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">Jul 2024 – Jul 2025</div>
+      <div class="timeline-role">Data Scientist Graduate Trainee</div>
+      <div class="timeline-company">L'Oréal · Business Development</div>
+      <ul class="timeline-desc">
+        <li>Analyzed large datasets to extract actionable growth insights for L'Oréal, Garnier, NYX, and Maybelline</li>
+        <li>Translated complex data findings into business strategies understood by non-technical stakeholders</li>
+        <li>Built the Promo Event Analysis Tool in Power BI, streamlining decision-making processes</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:14px;">
+        <span class="skill-tag">Power BI</span><span class="skill-tag">Python</span><span class="skill-tag">Business Strategy</span>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">Jan 2024 – Jul 2024</div>
+      <div class="timeline-role">Data & Tech Intern</div>
+      <div class="timeline-company">Havas · Digital Agency</div>
+      <ul class="timeline-desc">
+        <li>Crafted client-facing dashboards in Power BI, Tableau, and Looker Studio for Hermès, Lactalis, and British Council</li>
+        <li>Leveraged GCP and BigQuery to navigate complex datasets using SQL, Python, and ML techniques</li>
+        <li>Developed innovative data management solutions using APIs and automation</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:14px;">
+        <span class="skill-tag">GCP</span><span class="skill-tag">BigQuery</span><span class="skill-tag">Tableau</span><span class="skill-tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="timeline-item" style="padding-bottom:0;">
+      <div class="timeline-date">Jun 2023 – Jan 2024</div>
+      <div class="timeline-role">Digital Data Solutions</div>
+      <div class="timeline-company">MSD (Merck, Sharp & Dohme) · Pharmaceuticals</div>
+      <ul class="timeline-desc">
+        <li>Gathered and harmonized data from MConnect, On24, and SFMC using advanced data cleaning techniques</li>
+        <li>Produced event materials (HTML invitations, banners) that enhanced client engagement</li>
+      </ul>
+      <div class="skill-tags" style="margin-top:14px;">
+        <span class="skill-tag">SFMC</span><span class="skill-tag">Data Cleaning</span><span class="skill-tag">HTML</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="edu-inner">
+    <div class="section-label">Education</div>
+    <h2>Academic <span class="highlight2">foundation</span></h2>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-degree">MSc Big Data Analytics</div>
+        <div class="edu-school">Carlos III University of Madrid</div>
+        <div class="edu-dates">2025 – Present · Madrid, Spain</div>
+        <div class="edu-desc">Statistical analysis, ML, data mining with Python & R. Distributed frameworks: Hadoop, Spark, Storm. NoSQL, MapReduce, and cloud computing technologies.</div>
+        <div class="skill-tags" style="margin-top:16px;">
+          <span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">Spark</span><span class="skill-tag">Cloud</span>
+        </div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">BSc Computer Science — Cybersecurity</div>
+        <div class="edu-school">University of Wollongong in Dubai</div>
+        <div class="edu-dates">2021 – 2024 · Dubai, UAE</div>
+        <div class="edu-desc">Java, Python, C++, Linux. Full-stack web dev: HTML, CSS, JavaScript. Database management with MySQL & PostgreSQL. UI/UX with Figma and Adobe XD.</div>
+        <div class="skill-tags" style="margin-top:16px;">
+          <span class="skill-tag">Java</span><span class="skill-tag">Python</span><span class="skill-tag">MySQL</span><span class="skill-tag">Figma</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="section-label">Certifications</div>
+  <h2>Credentials & <span class="highlight">qualifications</span></h2>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-icon">📈</div>
+      <div>
+        <div class="cert-name">Advanced Google Data Analytics</div>
+        <div class="cert-year">Google</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">☁️</div>
+      <div>
+        <div class="cert-name">Azure Fundamentals</div>
+        <div class="cert-year">Microsoft</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔐</div>
+      <div>
+        <div class="cert-name">Security, Compliance & Identity Fundamentals</div>
+        <div class="cert-year">Microsoft</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🗄️</div>
+      <div>
+        <div class="cert-name">Azure Data Fundamentals</div>
+        <div class="cert-year">Microsoft</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌐</div>
+      <div>
+        <div class="cert-name">SAP S/4HANA Cloud — SAP Activate</div>
+        <div class="cert-year">SAP</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🛡️</div>
+      <div>
+        <div class="cert-name">Certified in Cybersecurity (CC)</div>
+        <div class="cert-year">ISC²</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">💾</div>
+      <div>
+        <div class="cert-name">Cloud Tech Fundamentals (Acronis)</div>
+        <div class="cert-year">Acronis</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="awards">
+  <div class="awards-inner">
+    <div class="section-label">Recognition</div>
+    <h2>Awards & <span class="highlight">achievements</span></h2>
+    <div class="awards-list">
+      <div class="award-item">
+        <div class="award-emoji">💻</div>
+        <div>
+          <div class="award-title">JetBrains Hackathon</div>
+          <div class="award-desc">Developed an innovative application to automate software building, from initial ideas and requirements to testing and final deployment.</div>
+        </div>
+        <div class="award-year">2026</div>
+      </div>
+      <div class="award-item">
+        <div class="award-emoji">🥇</div>
+        <div>
+          <div class="award-title">Web Warfare — CTF Showdown 1st Place</div>
+          <div class="award-desc">Captured first place in a competitive cybersecurity Capture The Flag competition, demonstrating advanced web security and hacking skills.</div>
+        </div>
+        <div class="award-year">2024</div>
+      </div>
+      <div class="award-item">
+        <div class="award-emoji">🏆</div>
+        <div>
+          <div class="award-title">WISP E-Business Case Project</div>
+          <div class="award-desc">Led a team to analyze "Women in Product" for the WISP industry program, proposing technology and business recommendations.</div>
+        </div>
+        <div class="award-year">2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label" style="justify-content:center;">Contact</div>
+  <h2>Let's <span class="highlight">work together</span></h2>
+  <p style="color:var(--muted); max-width:500px; margin:16px auto 0; font-family:'Lora',serif; font-size:15px; line-height:1.8;">
+    Open to data science, analytics, and cloud roles in Spain, broader EU, or Dubai. Let's connect.
+  </p>
+  <div class="contact-grid">
+    <a href="mailto:medscb17@gmail.com" class="contact-card">
+      <div class="contact-card-label">Email</div>
+      <div class="contact-card-value">medscb17@gmail.com</div>
+    </a>
+    <a href="tel:+971551363849" class="contact-card">
+      <div class="contact-card-label">Phone (UAE)</div>
+      <div class="contact-card-value">+971 55 136 3849</div>
+    </a>
+    <a href="https://linkedin.com/in/cristine-mediona" target="_blank" class="contact-card">
+      <div class="contact-card-label">LinkedIn</div>
+      <div class="contact-card-value">cristine-mediona</div>
+    </a>
+    <div class="contact-card">
+      <div class="contact-card-label">Location</div>
+      <div class="contact-card-value">Madrid · Dubai</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Cristine Mediona</span>
+  <span>Data Scientist · Big Data Analyst · Cloud Specialist</span>
+  <span>Madrid · Dubai</span>
+</footer>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.style.opacity = '1';
+      el.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.skill-card, .timeline-item, .edu-card, .cert-card, .award-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
